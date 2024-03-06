@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/screens/firstScreen.dart';
 
+import 'secondScreen.dart';
+
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
@@ -51,9 +53,9 @@ class _MainViewState extends State<MainView> {
               ),
 
               /// Second View
-              // SecondView(
-              //   nextPage: () => onNextPage(0),
-              // ),
+              SecondView(
+                nextPage: () => onNextPage(0),
+              ),
             ],
           )),
     );
