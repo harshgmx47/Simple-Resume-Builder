@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_builder/features/Add/addCubit.dart';
+import 'package:resume_builder/features/data/userStaticData.dart';
 import 'package:resume_builder/utils/colors/MyColors.dart';
 
 import 'widgets/skills_box.dart';
@@ -58,18 +59,19 @@ class MyHomePage extends StatelessWidget {
                 ),
 
                 /// Developer Skills
-                /// Developer Skills
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   alignment: WrapAlignment.center,
                   spacing: size.width * .05,
                   runSpacing: size.width * .03,
-                  children: state.userInfo.skillsAndProgress.map((entry) {
-                    return SkillBox(
-                      text: entry.name,
-                    );
-                  }).toList(),
+                  children: List.generate(
+                      UserData.userInfo.skillsAndProgress.length,
+                      (index) => SkillBox(
+                            text:
+                                UserData.userInfo.skillsAndProgress[index].name,
+                          )),
                 ),
+
                 // Empty Space
                 SizedBox(
                   height: size.height * 0.03,
@@ -78,12 +80,14 @@ class MyHomePage extends StatelessWidget {
                 /// Skills Progress
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: state.userInfo.skillsAndProgress.map((entry) {
-                    return SkillsProgress(
-                      progress: entry.progress,
-                      title: entry.name,
-                    );
-                  }).toList(),
+                  children: List.generate(
+                    UserData.userInfo.skillsAndProgress.length,
+                    (index) => SkillsProgress(
+                      progress:
+                          UserData.userInfo.skillsAndProgress[index].progress,
+                      title: UserData.userInfo.skillsAndProgress[index].name,
+                    ),
+                  ),
                 ),
                 // Empty Space
                 Expanded(child: Container()),
@@ -106,7 +110,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Error: ${state.message}'),
             );
           } else {
-            return const Center(
+            return Center(
               child: Text('Unknown state'),
             );
           }
