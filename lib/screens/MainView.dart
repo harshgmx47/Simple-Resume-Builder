@@ -40,24 +40,31 @@ class _MainViewState extends State<MainView> {
 
     return Scaffold(
       body: SizedBox(
-          width: size.width,
-          height: size.height,
-          child: PageView(
-            controller: pageController,
-            scrollDirection: Axis.vertical,
-            children: [
-              // First View
-              MyHomePage(
-                title: "FirstPage",
-                nextPage: () => onNextPage(1),
-              ),
+        width: size.width,
+        height: size.height,
+        child: PageView(
+          controller: pageController,
+          scrollDirection: Axis.vertical,
+          children: [
+            // First View
+            MyHomePage(
+              title: "FirstPage",
+              nextPage: () => onNextPage(1),
+            ),
 
-              /// Second View
-              SecondView(
-                nextPage: () => onNextPage(0),
-              ),
-            ],
-          )),
+            /// Second View
+            SecondView(
+              nextPage: () => onNextPage(0),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed("/second");
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

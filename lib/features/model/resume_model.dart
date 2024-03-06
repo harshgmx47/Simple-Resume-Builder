@@ -1,4 +1,5 @@
-/// Developer model class
+// resume_model.dart
+
 class UserInfo {
   final String name;
   final String number;
@@ -8,19 +9,19 @@ class UserInfo {
   final List<String> hobbies;
 
   UserInfo({
+    required this.name,
     required this.number,
     required this.mail,
-    required this.name,
     required this.bio,
     required this.skillsAndProgress,
     required this.hobbies,
   });
 }
 
-/// Skills model class
 class SkillsData {
   final String name;
   final double progress;
+
   SkillsData({
     required this.name,
     required this.progress,

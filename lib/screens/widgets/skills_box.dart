@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:resume_builder/utils/colors/MyColors.dart';
 
 class SkillBox extends StatelessWidget {
-  const SkillBox({super.key, required this.text});
+  const SkillBox({
+    super.key,
+    required this.text,
+  });
 
   final String text;
 
