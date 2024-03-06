@@ -48,7 +48,7 @@ class _MainViewState extends State<MainView> {
           children: [
             // First View
             MyHomePage(
-              title: "FirstPage",
+              title: "Resume CV",
               nextPage: () => onNextPage(1),
             ),
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resume_builder/features/Add/addCubit.dart';
-import 'package:resume_builder/features/data/userStaticData.dart';
 import 'package:resume_builder/utils/colors/MyColors.dart';
 
 import 'widgets/skills_box.dart';
@@ -65,10 +64,9 @@ class MyHomePage extends StatelessWidget {
                   spacing: size.width * .05,
                   runSpacing: size.width * .03,
                   children: List.generate(
-                      UserData.userInfo.skillsAndProgress.length,
+                      state.userInfo.skillsAndProgress.length,
                       (index) => SkillBox(
-                            text:
-                                UserData.userInfo.skillsAndProgress[index].name,
+                            text: state.userInfo.skillsAndProgress[index].name,
                           )),
                 ),
 
@@ -79,16 +77,24 @@ class MyHomePage extends StatelessWidget {
 
                 /// Skills Progress
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: List.generate(
-                    UserData.userInfo.skillsAndProgress.length,
-                    (index) => SkillsProgress(
-                      progress:
-                          UserData.userInfo.skillsAndProgress[index].progress,
-                      title: UserData.userInfo.skillsAndProgress[index].name,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: List.generate(
+                        state.userInfo.skillsAndProgress.length,
+                        (index) => SkillsProgress(
+                            progress: state
+                                .userInfo.skillsAndProgress[index].progress,
+                            title:
+                                state.userInfo.skillsAndProgress[index].name))
+
+                    // List.generate(
+                    //   UserData.userInfo.skillsAndProgress.length,
+                    //   (index) => SkillsProgress(
+                    //     progress:
+                    //         UserData.userInfo.skillsAndProgress[index].progress,
+                    //     title: UserData.userInfo.skillsAndProgress[index].name,
+                    //   ),
+                    // ),
                     ),
-                  ),
-                ),
                 // Empty Space
                 Expanded(child: Container()),
 

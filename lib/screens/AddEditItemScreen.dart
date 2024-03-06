@@ -79,6 +79,8 @@ class AddUpdateUserInfoScreen extends StatelessWidget {
                   height: size.height * 0.02,
                 ),
                 TextField(
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
                   style: Theme.of(context).textTheme.bodyMedium,
                   controller: bioController,
                   decoration: InputDecoration(
@@ -111,6 +113,7 @@ class AddUpdateUserInfoScreen extends StatelessWidget {
                   height: size.height * 0.02,
                 ),
                 TextField(
+                  style: Theme.of(context).textTheme.bodyMedium,
                   controller: hobbiesController,
                   decoration: InputDecoration(
                     labelText: 'Hobbies',
@@ -128,13 +131,34 @@ class AddUpdateUserInfoScreen extends StatelessWidget {
                 // Add/Update button
                 ElevatedButton(
                   onPressed: () {
+                    final skillsWithProgress = skillsAndProgressController.text
+                        .split(',')
+                        .map((entry) {
+                          final parts = entry.split(':');
+                          if (parts.length == 2) {
+                            final skill = parts[0].trim();
+                            final progress = double.tryParse(parts[1].trim());
+
+                            if (progress != null) {
+                              return SkillsData(
+                                  name: skill, progress: progress);
+                            }
+                          }
+                          return null;
+                        })
+                        .where((element) => element != null)
+                        .cast<SkillsData>()
+                        .toList();
                     final userInfo = UserInfo(
                       name: nameController.text,
                       number: numberController.text,
                       mail: mailController.text,
                       bio: bioController.text,
-                      skillsAndProgress: [],
-                      hobbies: [hobbiesController.text],
+                      skillsAndProgress: skillsWithProgress,
+                      hobbies: hobbiesController.text
+                          .split(',')
+                          .map((e) => e.trim())
+                          .toList(),
                     );
                     context.read<UserDataCubit>().addOrUpdateUserInfo(userInfo);
                     Navigator.pop(context);
